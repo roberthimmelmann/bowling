@@ -1,7 +1,7 @@
 package bowling
 
 class Bowling(val frames: List<Frame>) {
-    fun getTotalPoints() = frames.map(Frame::points).sum()
+    fun getTotalPoints() = frames.map(Frame::getPoints).sum()
 
     companion object {
         fun fromRolls(rolls: List<Int>): Bowling {
@@ -15,13 +15,7 @@ class Bowling(val frames: List<Frame>) {
                     i++
                 }
                 i++
-                var points = firstRoll + (secondRoll ?: 0)
-                if (points == 10) {
-                    points += rolls.getOrElse(i) { 0 }
-                    if (firstRoll == 10)
-                        points += rolls.getOrElse(i + 1) { 0 }
-                }
-                frames.add(Frame(firstRoll, secondRoll, points))
+                frames.add(Frame(firstRoll, secondRoll, rolls.getOrElse(i) { 0 }, rolls.getOrElse(i + 1) { 0 }))
             }
             return Bowling(frames)
         }

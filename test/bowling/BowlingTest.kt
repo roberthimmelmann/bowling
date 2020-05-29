@@ -18,17 +18,17 @@ internal class BowlingTest {
 
     @Test
     fun testSpare() {
-        assertEquals(12, Bowling.fromRolls(listOf(6, 4, 2, 5, 9)).frames.get(0).points)
+        assertEquals(12, Bowling.fromRolls(listOf(6, 4, 2, 5, 9)).frames.get(0).getPoints())
     }
 
     @Test
     fun testStrike() {
-        assertEquals(17, Bowling.fromRolls(listOf(10, 2, 5, 9)).frames.get(0).points)
+        assertEquals(17, Bowling.fromRolls(listOf(10, 2, 5, 9)).frames.get(0).getPoints())
     }
 
     @Test
     fun testUnfinishedSpareOrStrike() {
-        assertEquals(10, Bowling.fromRolls(listOf(6, 4)).frames.get(0).points)
-        assertEquals(12, Bowling.fromRolls(listOf(10, 2)).frames.get(0).points)
+        assertEquals(10, Bowling.fromRolls(listOf(6, 4)).frames.get(0).getPoints())
+        assertEquals(12, Bowling.fromRolls(listOf(10, 2)).frames.get(0).getPoints())
     }
 }
