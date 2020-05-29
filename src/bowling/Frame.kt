@@ -1,11 +1,11 @@
 package bowling
 
-class Frame(val firstThrow: Int, val secondThrow: Int?, val nextRoll: Int, val secondNextRoll: Int) {
+class Frame(val firstRoll: Int, val secondRoll: Int?, val nextRoll: Int, val secondNextRoll: Int) {
     fun getPoints(): Int {
-        var points = firstThrow + (secondThrow ?: 0)
+        var points = firstRoll + (secondRoll ?: 0)
         if (points == 10) {
             points += nextRoll
-            if (secondThrow == null) {
+            if (secondRoll == null) {
                 points += secondNextRoll
             }
         }
