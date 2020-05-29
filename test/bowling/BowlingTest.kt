@@ -25,4 +25,10 @@ internal class BowlingTest {
     fun testStrike() {
         assertEquals(17, Bowling.fromRolls(listOf(10, 2, 5, 9)).frames.get(0).points)
     }
+
+    @Test
+    fun testUnfinishedSpareOrStrike() {
+        assertEquals(10, Bowling.fromRolls(listOf(6, 4)).frames.get(0).points)
+        assertEquals(12, Bowling.fromRolls(listOf(10, 2)).frames.get(0).points)
+    }
 }
