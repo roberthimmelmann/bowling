@@ -55,13 +55,16 @@ internal class BowlingTest {
     @Test
     fun testGameFinished() {
         //Finished games
-        assertTrue { Bowling.fromRolls(listOf(1, 1, 1, 1)).isGameFinished(2) }
-        assertTrue { Bowling.fromRolls(listOf(10, 1, 1)).isGameFinished(2) }
+        assertTrue { Bowling.fromRolls(listOf(1, 1, 1, 1), 2).isGameFinished() }
+        assertTrue { Bowling.fromRolls(listOf(10, 1, 1), 2).isGameFinished() }
         //unfinished game
-        assertFalse { Bowling.fromRolls(listOf(1, 1, 1)).isGameFinished(2) }
+        assertFalse { Bowling.fromRolls(listOf(1, 1, 1), 2).isGameFinished() }
         //after a strike the game doesn't immediately end
-        /*assertFalse { Bowling.fromRolls(listOf(1, 1, 10)).isGameFinished(2) }
-        assertFalse { Bowling.fromRolls(listOf(1, 1, 10, 1)).isGameFinished(2) }
-        assertFalse { Bowling.fromRolls(listOf(1, 1, 10, 1,1)).isGameFinished(2) }*/
+        assertFalse { Bowling.fromRolls(listOf(1, 1, 10), 2).isGameFinished() }
+        assertFalse { Bowling.fromRolls(listOf(1, 1, 10, 1), 2).isGameFinished() }
+        assertTrue { Bowling.fromRolls(listOf(1, 1, 10, 1, 1), 2).isGameFinished() }
+        //after a spare the game doesn't immediately end
+        assertFalse { Bowling.fromRolls(listOf(1, 1, 5, 5), 2).isGameFinished() }
+        assertTrue { Bowling.fromRolls(listOf(1, 1, 5, 5, 1), 2).isGameFinished() }
     }
 }
