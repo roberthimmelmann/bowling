@@ -3,6 +3,7 @@ package bowling
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 internal class BowlingTest {
     @Test
@@ -48,5 +49,11 @@ internal class BowlingTest {
         assertEquals(5, b.get(2).firstRoll)
         assertEquals(5, b.get(2).secondRoll)
         assertEquals(13, b.get(2).getPoints())
+    }
+
+    @Test
+    fun testGameFinished() {
+        assertTrue { Bowling.fromRolls(listOf(1, 1, 1, 1)).isGameFinished(2) }
+        assertTrue { Bowling.fromRolls(listOf(10, 1, 1)).isGameFinished(2) }
     }
 }

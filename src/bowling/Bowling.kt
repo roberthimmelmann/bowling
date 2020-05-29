@@ -20,4 +20,10 @@ class Bowling(val frames: List<Frame>) {
             return Bowling(frames)
         }
     }
+
+    fun isGameFinished(maxFrames: Int): Boolean {
+        if (frames.size < maxFrames)
+            return false
+        return true
+    }
 }
