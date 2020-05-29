@@ -15,4 +15,14 @@ internal class BowlingTest {
         assertEquals(6, Bowling.fromRolls(listOf(1,2,3)).getTotalPoints())
         assertEquals(16, Bowling.fromRolls(listOf(5,2,9)).getTotalPoints())
     }
+
+    @Test
+    fun testSpare() {
+        assertEquals(12, Bowling.fromRolls(listOf(6,4,2,5,9)).frames.get(0).points)
+    }
+
+    @Test
+    fun testStrike() {
+        assertEquals(17, Bowling.fromRolls(listOf(10,2,5,9)).frames.get(0).points)
+    }
 }

@@ -16,9 +16,14 @@ class Bowling(val frames:List<Frame>) {
                     secondRoll = rolls.getOrNull(i + 1)
                     i++
                 }
-                val points = firstRoll + (secondRoll ?: 0)
-                frames.add(Frame(firstRoll, secondRoll, points))
                 i++
+                var points = firstRoll + (secondRoll ?: 0)
+                if (points == 10) {
+                    points += rolls.getOrElse(i){0}
+                    if (firstRoll == 10)
+                        points += rolls.getOrElse(i+1){0}
+                }
+                frames.add(Frame(firstRoll, secondRoll, points))
             }
             return Bowling(frames)
         }
