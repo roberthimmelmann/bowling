@@ -21,16 +21,6 @@ class Bowling(val frames: List<Frame>, val maxFrames: Int) {
         }
     }
 
-    fun isGameFinished(): Boolean {
-        if (frames.size < maxFrames)
-            return false
-        val frame = frames.last()
-        if (frame.firstRoll < 10 && frame.secondRoll == null)
-            return false
-        if (frame.firstRoll == 10 && frame.secondNextRoll == null)
-            return false
-        if (frame.firstRoll + (frame.secondRoll ?: 0) == 10 && frame.nextRoll == null)
-            return false
-        return true
-    }
+    fun isGameFinished() =
+        if (frames.size < maxFrames) false else frames.last().isFinished()
 }

@@ -11,4 +11,14 @@ class Frame(val firstRoll: Int, val secondRoll: Int?, val nextRoll: Int?, val se
         }
         return points
     }
+
+    fun isFinished(): Boolean {
+        if (firstRoll < 10 && secondRoll == null)
+            return false
+        if (firstRoll == 10 && secondNextRoll == null)
+            return false
+        if (firstRoll + (secondRoll ?: 0) == 10 && nextRoll == null)
+            return false
+        return true
+    }
 }
