@@ -22,14 +22,24 @@ internal class MainTest {
     var main = Main(cmd)
 
     @Test
-    fun test1() {
+    fun testMain() {
         main = Main(cmd, 1)
         cmd.rolls.add(5)
         cmd.rolls.add(3)
         main.run()
-        assertEquals(cmd.output.removeFirst(), "Next roll > ")
-        assertEquals(cmd.output.removeFirst(), "Next roll > ")
-        assertEquals(cmd.output.removeFirst(), "Game finished!")
-        assertEquals(cmd.output.removeFirst(), "Final score: 8")
+        assertEquals("Next roll > ", cmd.output.removeFirst())
+        assertEquals("Next roll > ", cmd.output.removeFirst())
+        assertEquals("Game finished!", cmd.output.removeFirst())
+        assertEquals("Final score: 8", cmd.output.removeFirst())
+    }
+
+    @Test
+    fun testPrintScore() {
+        main = Main(cmd, 1)
+        main.printScore(Bowling.fromRolls(listOf(5, 3), 1))
+        assertEquals("        +--1--+", cmd.output.removeFirst())
+        assertEquals("Rolls:  | 5 3 |", cmd.output.removeFirst())
+        assertEquals("Points: |   8 |", cmd.output.removeFirst())
+        assertEquals("        +-----+", cmd.output.removeFirst())
     }
 }

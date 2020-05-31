@@ -15,6 +15,26 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
             rolls.add(cmd.readInt())
         }
     }
+
+    fun printScore(bowling: Bowling) {
+        val firstLine = StringBuffer("        +")
+        val rollsLine = StringBuffer("Rolls:  |")
+        val pointsLine = StringBuffer("Points: |")
+        val lastLine = StringBuffer("        +")
+
+        for (i in bowling.frames.indices) {
+            val frame = bowling.frames.get(i)
+            firstLine.append("--%d--+".format(i + 1))
+            rollsLine.append(" %d %d |".format(frame.firstRoll, frame.secondRoll))
+            pointsLine.append(" %3d |".format(frame.getPoints()))
+            lastLine.append("-----+")
+        }
+
+        cmd.println(firstLine.toString())
+        cmd.println(rollsLine.toString())
+        cmd.println(pointsLine.toString())
+        cmd.println(lastLine.toString())
+    }
 }
 
 fun main(args: Array<String>) {
