@@ -87,4 +87,14 @@ internal class MainTest {
         assertEquals("Points: |      14 |", cmd.output.removeFirst())
         assertEquals("        +---------+", cmd.output.removeFirst())
     }
+
+    @Test
+    fun testPrintEmptyFrames() {
+        main = Main(cmd, 2)
+        main.printScore(Bowling.fromRolls(listOf(1), 2))
+        assertEquals("        +--1--+--2--+", cmd.output.removeFirst())
+        assertEquals("Rolls:  | 1 _ |     |", cmd.output.removeFirst())
+        assertEquals("Points: |   _ |   _ |", cmd.output.removeFirst())
+        assertEquals("        +-----+-----+", cmd.output.removeFirst())
+    }
 }

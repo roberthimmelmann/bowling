@@ -42,6 +42,13 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
             lastLine.append("-----+")
         }
 
+        for (i in bowling.frames.size..maxFrames - 1) {
+            firstLine.append("-%2d--+".format(i + 1).replace(" ", "-"))
+            rollsLine.append("     |")
+            pointsLine.append("   _ |")
+            lastLine.append("-----+")
+        }
+
         cmd.println(firstLine.toString())
         cmd.println(rollsLine.toString())
         cmd.println(pointsLine.toString())
