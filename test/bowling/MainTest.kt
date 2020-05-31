@@ -3,6 +3,8 @@ package bowling
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.util.*
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class MockCmdInteraction : CmdInteraction() {
     val rolls = LinkedList<Int>()
@@ -38,6 +40,23 @@ internal class MainTest {
         repeat(4) { cmd.output.removeFirst() }
         assertEquals("Game finished!", cmd.output.removeFirst())
         assertEquals("Final score: 8", cmd.output.removeFirst())
+    }
+
+    @Test
+    fun testGameFinished() {
+        main = Main(cmd, 2)
+        //Finished games
+        assertTrue { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 1, 1), 2)) }
+        assertTrue { main.isGameFinished(Bowling.fromRolls(listOf(10, 1, 1), 2)) }
+        //unfinished game
+        assertFalse { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 1), 2)) }
+        //after a strike the game doesn't immediately end
+        assertFalse { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 10), 2)) }
+        assertFalse { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 10, 1), 2)) }
+        assertTrue { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 10, 1, 1), 2)) }
+        //after a spare the game doesn't immediately end
+        assertFalse { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 5, 5), 2)) }
+        assertTrue { main.isGameFinished(Bowling.fromRolls(listOf(1, 1, 5, 5, 1), 2)) }
     }
 
     @Test

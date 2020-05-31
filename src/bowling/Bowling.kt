@@ -1,13 +1,8 @@
 package bowling
 
 class Bowling(val frames: List<Frame>, val maxFrames: Int) {
-    fun getTotalPoints() = frames.map(Frame::getPoints).sum()
-
-    fun isGameFinished() =
-        if (frames.size < maxFrames) false else frames.last().isFinished()
-
     companion object {
-        fun fromRolls(rolls: List<Int>, maxFrames: Int = 10): Bowling {
+        fun fromRolls(rolls: List<Int>, maxFrames: Int = 10): List<Frame> {
             val frames = mutableListOf<Frame>()
             var i = 0
             while (i < rolls.size && frames.size < maxFrames) {
@@ -20,8 +15,7 @@ class Bowling(val frames: List<Frame>, val maxFrames: Int) {
                 i++
                 frames.add(Frame(firstRoll, secondRoll, rolls.getOrNull(i), rolls.getOrNull(i + 1)))
             }
-            return Bowling(frames, maxFrames)
+            return frames
         }
     }
-
 }
