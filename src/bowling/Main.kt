@@ -1,8 +1,19 @@
 package bowling
 
-class Main(val cmd: CmdInteraction) {
+class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
+    val rolls = mutableListOf<Int>()
+
     fun run() {
-        cmd.println("First roll:")
+        while (true) {
+            val bowling = Bowling.fromRolls(rolls, maxFrames)
+            if (bowling.isGameFinished()) {
+                cmd.println("Game finished!")
+                cmd.println("Final score: " + bowling.getTotalPoints())
+                break
+            }
+            cmd.println("Next roll > ")
+            rolls.add(cmd.readInt())
+        }
     }
 }
 
