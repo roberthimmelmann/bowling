@@ -1,7 +1,11 @@
 package bowling
 
-class Main {
-    fun test(): Int {
-        return 1
+class Main(val cmd: CmdInteraction) {
+    fun run() {
+        cmd.println("First roll:")
     }
+}
+
+fun main(args: Array<String>) {
+
 }
