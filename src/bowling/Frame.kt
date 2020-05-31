@@ -1,11 +1,18 @@
 package bowling
 
 /**
- * Represents the score of one frame. The frame can be in progress, i.e., not all rolls of the frame have been made. In this case the relevant values are null.
+ * Represents the score of one frame. The frame can be in progress, i.e., not all rolls of the frame have been made.
+ * In this case the relevant values are null.
+ *
+ * nextRoll and secondNextRoll refer to bonus rolls from the next frame
  */
 class Frame(val firstRoll: Int, val secondRoll: Int?, val nextRoll: Int?, val secondNextRoll: Int?) {
     init {
-        require(firstRoll >= 0 && firstRoll <= 10)
+        require(firstRoll in 0..10)
+        require(secondRoll ?: 0 in 0..10)
+        require(nextRoll ?: 0 in 0..10)
+        require(secondNextRoll ?: 0 in 0..10)
+        require((firstRoll + (secondRoll ?: 0)) in 0..10)
     }
 
     fun getPoints(): Int {

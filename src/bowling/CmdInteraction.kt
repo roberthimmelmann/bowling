@@ -8,6 +8,12 @@ open class CmdInteraction {
             print("Not a valid number, try again > ")
             return readInt()
         }
+        if (result !in 0..10) {
+            print("Please input a number between 0 and 10 > ")
+            return readInt()
+        }
+        // TODO Catch cases where the second roll or a frame exceeds the number of standing pins.
+        // That results in an IllegalArgumentExcception right now.
         return result
     }
 
