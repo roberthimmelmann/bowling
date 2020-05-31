@@ -15,6 +15,10 @@ internal class MockCmdInteraction : CmdInteraction() {
     override fun println(arg: String) {
         output.add(arg)
     }
+
+    override fun print(arg: String) {
+        output.add(arg)
+    }
 }
 
 internal class MainTest {
@@ -66,6 +70,12 @@ internal class MainTest {
         assertEquals("        +--1--+--2--+", cmd.output.removeFirst())
         assertEquals("Rolls:  | 5 / | 2 _ |", cmd.output.removeFirst())
         assertEquals("Points: |  12 |   _ |", cmd.output.removeFirst())
+        assertEquals("        +-----+-----+", cmd.output.removeFirst())
+        main = Main(cmd, 2)
+        main.printScore(Bowling.fromRolls(listOf(5, 5), 2))
+        assertEquals("        +--1--+--2--+", cmd.output.removeFirst())
+        assertEquals("Rolls:  | 5 / |     |", cmd.output.removeFirst())
+        assertEquals("Points: |   _ |   _ |", cmd.output.removeFirst())
         assertEquals("        +-----+-----+", cmd.output.removeFirst())
         main = Main(cmd, 1)
         main.printScore(Bowling.fromRolls(listOf(5, 5, 2), 1))

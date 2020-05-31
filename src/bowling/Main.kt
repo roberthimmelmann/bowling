@@ -12,7 +12,7 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
                 cmd.println("Final score: " + bowling.getTotalPoints())
                 break
             }
-            cmd.println("Next roll > ")
+            cmd.print("Next roll > ")
             rolls.add(cmd.readInt())
         }
     }
@@ -28,7 +28,7 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
             val frame = bowling.frames.get(i)
             rollsLine.append(" %s %s ".format(frame.formatFirstRoll(), frame.formatSecondRoll()))
 
-            if (frame.isSpareOrStrike() && i == bowling.frames.size - 1) {
+            if (frame.isSpareOrStrike() && i == maxFrames - 1) {
                 val additionalRolls =
                     "%s %s ".format(frame.nextRoll?.toString() ?: "_", frame.secondNextRoll?.toString() ?: "_")
                 firstLine.append("-".repeat(additionalRolls.length))
@@ -65,5 +65,5 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 }
 
 fun main(args: Array<String>) {
-
+    Main(CmdInteraction(), 10).run()
 }
