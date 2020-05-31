@@ -6,7 +6,7 @@ import kotlin.test.assertNull
 
 internal class BowlingTest {
     fun getScore(rolls: List<Int>) =
-        Main.getScore(Bowling.fromRolls(rolls))
+        Main.getScore(Main.framesFromRolls(rolls))
 
     @Test
     fun testSingleRoll() {
@@ -22,23 +22,23 @@ internal class BowlingTest {
 
     @Test
     fun testSpare() {
-        assertEquals(12, Bowling.fromRolls(listOf(6, 4, 2, 5, 9)).get(0).getPoints())
+        assertEquals(12, Main.framesFromRolls(listOf(6, 4, 2, 5, 9)).get(0).getPoints())
     }
 
     @Test
     fun testStrike() {
-        assertEquals(17, Bowling.fromRolls(listOf(10, 2, 5, 9)).get(0).getPoints())
+        assertEquals(17, Main.framesFromRolls(listOf(10, 2, 5, 9)).get(0).getPoints())
     }
 
     @Test
     fun testUnfinishedSpareOrStrike() {
-        assertEquals(10, Bowling.fromRolls(listOf(6, 4)).get(0).getPoints())
-        assertEquals(12, Bowling.fromRolls(listOf(10, 2)).get(0).getPoints())
+        assertEquals(10, Main.framesFromRolls(listOf(6, 4)).get(0).getPoints())
+        assertEquals(12, Main.framesFromRolls(listOf(10, 2)).get(0).getPoints())
     }
 
     @Test
     fun testMultipleFrames() {
-        val b = Bowling.fromRolls(listOf(1, 3, 10, 5, 5, 3, 1))
+        val b = Main.framesFromRolls(listOf(1, 3, 10, 5, 5, 3, 1))
 
         assertEquals(1, b.get(0).firstRoll)
         assertEquals(3, b.get(0).secondRoll)

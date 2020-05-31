@@ -4,6 +4,22 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
     val rolls = mutableListOf<Int>()
 
     companion object {
+        fun framesFromRolls(rolls: List<Int>, maxFrames: Int = 10): List<Frame> {
+            val frames = mutableListOf<Frame>()
+            var i = 0
+            while (i < rolls.size && frames.size < maxFrames) {
+                val firstRoll = rolls[i]
+                var secondRoll: Int? = null
+                if (firstRoll < 10) {
+                    secondRoll = rolls.getOrNull(i + 1)
+                    i++
+                }
+                i++
+                frames.add(Frame(firstRoll, secondRoll, rolls.getOrNull(i), rolls.getOrNull(i + 1)))
+            }
+            return frames
+        }
+
         fun getScore(frames: List<Frame>) = frames.map(Frame::getPoints).sum()
     }
 
@@ -12,7 +28,7 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 
     fun run() {
         while (true) {
-            val bowling = Bowling.fromRolls(rolls, maxFrames)
+            val bowling = framesFromRolls(rolls, maxFrames)
             printScore(bowling)
             if (isGameFinished(bowling)) {
                 cmd.println("Game finished!")
