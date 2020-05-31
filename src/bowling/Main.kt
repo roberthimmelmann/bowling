@@ -6,6 +6,7 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
     fun run() {
         while (true) {
             val bowling = Bowling.fromRolls(rolls, maxFrames)
+            printScore(bowling)
             if (bowling.isGameFinished()) {
                 cmd.println("Game finished!")
                 cmd.println("Final score: " + bowling.getTotalPoints())
@@ -21,6 +22,7 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
         val rollsLine = StringBuffer("Rolls:  |")
         val pointsLine = StringBuffer("Points: |")
         val lastLine = StringBuffer("        +")
+        var score = 0
 
         for (i in bowling.frames.indices) {
             val frame = bowling.frames.get(i)
@@ -35,7 +37,13 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
                 rollsLine.append(additionalRolls)
             }
 
-            pointsLine.append(" %3s ".format(if (frame.isFinished()) "%d".format(frame.getPoints()) else "_"))
+            if (frame.isFinished()) {
+                score += frame.getPoints()
+                pointsLine.append(" %3d ".format(score))
+            } else {
+                pointsLine.append("   _ ")
+
+            }
             rollsLine.append("|")
             pointsLine.append("|")
             firstLine.append("-%2d--+".format(i + 1).replace(" ", "-"))
