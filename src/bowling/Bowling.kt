@@ -30,11 +30,11 @@ class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 
     fun run() {
         while (true) {
-            val bowling = framesFromRolls(rolls, maxFrames)
-            printScore(bowling)
-            if (isGameFinished(bowling)) {
+            val frames = framesFromRolls(rolls, maxFrames)
+            printScore(frames)
+            if (isGameFinished(frames)) {
                 cmd.println("Game finished!")
-                cmd.println("Final score: " + getScore(bowling))
+                cmd.println("Final score: " + getScore(frames))
                 break
             }
             cmd.print("Next roll > ")
@@ -42,15 +42,15 @@ class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
         }
     }
 
-    fun printScore(bowling: List<Frame>) {
+    fun printScore(frames: List<Frame>) {
         val firstLine = StringBuffer("        +")
         val rollsLine = StringBuffer("Rolls:  |")
         val pointsLine = StringBuffer("Points: |")
         val lastLine = StringBuffer("        +")
         var score = 0
 
-        for (i in bowling.indices) {
-            val frame = bowling.get(i)
+        for (i in frames.indices) {
+            val frame = frames.get(i)
             rollsLine.append(" %s %s ".format(frame.formatFirstRoll(), frame.formatSecondRoll()))
 
             if (frame.isSpareOrStrike() && i == maxFrames - 1) {
@@ -75,7 +75,7 @@ class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
             lastLine.append("-----+")
         }
 
-        for (i in bowling.size until maxFrames) {
+        for (i in frames.size until maxFrames) {
             firstLine.append("-%2d--+".format(i + 1).replace(" ", "-"))
             rollsLine.append("     |")
             pointsLine.append("   _ |")
