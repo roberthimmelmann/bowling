@@ -5,6 +5,8 @@ class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 
     companion object {
         fun framesFromRolls(rolls: List<Int>, maxFrames: Int = 10): List<Frame> {
+            // Frames and scores are always calculated from scratch. As there are only 10 frames in a game, this
+            // will not have a noticeable impact on performance. Avoiding state increases readability and testabilty.
             val frames = mutableListOf<Frame>()
             var i = 0
             while (i < rolls.size && frames.size < maxFrames) {
@@ -73,7 +75,7 @@ class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
             lastLine.append("-----+")
         }
 
-        for (i in bowling.size..maxFrames - 1) {
+        for (i in bowling.size until maxFrames) {
             firstLine.append("-%2d--+".format(i + 1).replace(" ", "-"))
             rollsLine.append("     |")
             pointsLine.append("   _ |")

@@ -1,5 +1,8 @@
 package bowling
 
+/**
+ * Encapsulate cmd interaction to ease testing.
+ */
 open class CmdInteraction {
     open fun readInt(): Int {
         val s = readLine()

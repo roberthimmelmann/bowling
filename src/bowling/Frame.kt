@@ -26,6 +26,10 @@ class Frame(val firstRoll: Int, val secondRoll: Int?, val nextRoll: Int?, val se
         return points
     }
 
+    /**
+     * A frame is finished when all rolls needed to calculate the score have been made. In the case of a spare or
+     * strike this included rolls from the next frame.
+     */
     fun isFinished(): Boolean {
         if (firstRoll < 10 && secondRoll == null)
             return false

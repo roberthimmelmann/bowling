@@ -7,6 +7,9 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
+/*
+ * Mockito could be used instead. This method here works without too much clutter, so the simpler design is preferred.
+ */
 internal class MockCmdInteraction : CmdInteraction() {
     val rolls = LinkedList<Int>()
     val output = LinkedList<String>()
