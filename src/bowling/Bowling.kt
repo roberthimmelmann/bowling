@@ -1,6 +1,6 @@
 package bowling
 
-class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
+class Bowling(val cmd: CmdInteraction, val maxFrames: Int = 10) {
     val rolls = mutableListOf<Int>()
 
     companion object {
@@ -88,5 +88,5 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 }
 
 fun main(args: Array<String>) {
-    Main(CmdInteraction(), 10).run()
+    Bowling(CmdInteraction(), 10).run()
 }
