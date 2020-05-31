@@ -24,9 +24,21 @@ class Main(val cmd: CmdInteraction, val maxFrames: Int = 10) {
 
         for (i in bowling.frames.indices) {
             val frame = bowling.frames.get(i)
-            firstLine.append("--%d--+".format(i + 1))
-            rollsLine.append(" %d %d |".format(frame.firstRoll, frame.secondRoll))
-            pointsLine.append(" %3d |".format(frame.getPoints()))
+            rollsLine.append(" %s %s ".format(frame.formatFirstRoll(), frame.formatSecondRoll()))
+
+            if (frame.isSpareOrStrike() && i == bowling.frames.size - 1) {
+                val additionalRolls =
+                    "%s %s ".format(frame.nextRoll?.toString() ?: "_", frame.secondNextRoll?.toString() ?: "_")
+                firstLine.append("-".repeat(additionalRolls.length))
+                lastLine.append("-".repeat(additionalRolls.length))
+                pointsLine.append(" ".repeat(additionalRolls.length))
+                rollsLine.append(additionalRolls)
+            }
+
+            pointsLine.append(" %3s ".format(if (frame.isFinished()) "%d".format(frame.getPoints()) else "_"))
+            rollsLine.append("|")
+            pointsLine.append("|")
+            firstLine.append("-%2d--+".format(i + 1).replace(" ", "-"))
             lastLine.append("-----+")
         }
 

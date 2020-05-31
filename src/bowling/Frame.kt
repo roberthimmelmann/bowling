@@ -28,4 +28,8 @@ class Frame(val firstRoll: Int, val secondRoll: Int?, val nextRoll: Int?, val se
             return false
         return true
     }
+
+    fun formatFirstRoll(): String = if (firstRoll == 10) "X" else firstRoll.toString()
+    fun formatSecondRoll(): String = if (firstRoll != 10 && isSpareOrStrike()) "/" else (secondRoll?.toString() ?: "_")
+    fun isSpareOrStrike() = firstRoll + (secondRoll ?: 0) == 10
 }
